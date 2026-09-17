@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng: Unit 3 - My Friends (GS6)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12301f;
+    --ink-soft:#3f5548;
+    --paper:#eef3ec;
+    --card:#ffffff;
+    --amber:#c8871a;
+    --amber-deep:#a86e10;
+    --good:#1f7a4d;
+    --good-bg:#e3f3e8;
+    --bad:#b23b2e;
+    --bad-bg:#fbe7e3;
+    --line: rgba(18,48,31,0.16);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    line-height:1.5;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 120px;
+    opacity:0.35;
+    z-index:0;
+  }
+  .wrap{ position:relative; z-index:1; width:100%; max-width:600px; }
+  header.top{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:22px; gap:12px;
+  }
+  header.top h1{
+    font-family:var(--serif); font-size:21px; font-weight:600; margin:0; letter-spacing:-0.01em;
+  }
+  header.top .tag{ font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+  .progress-track{
+    height:6px; background:rgba(18,48,31,0.12); border-radius:3px; overflow:hidden; margin-bottom:36px;
+  }
+  .progress-fill{ height:100%; background:var(--amber); width:0%; transition:width .35s ease; }
+
+  .card{ background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:32px 28px; }
+  .qmeta{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--ink-soft); margin-bottom:18px; }
+  .prompt-label{ font-size:13px; color:var(--ink-soft); margin-bottom:6px; }
+  .term{ font-family:var(--serif); font-size:30px; font-weight:700; line-height:1.2; margin:0 0 6px; }
+  .ipa{ font-size:16px; color:var(--amber-deep); margin:0 0 26px; font-weight:500; }
+
+  .choices{ display:flex; flex-direction:column; gap:10px; }
+  .choice-btn{
+    text-align:left; background:var(--card); border:1.5px solid var(--ink); border-radius:5px;
+    padding:13px 16px; font-family:var(--sans); font-size:15.5px; color:var(--ink); cursor:pointer;
+    transition:background .15s ease;
+  }
+  .choice-btn:hover:not(:disabled){ background:#f1ede1; }
+  .choice-btn:disabled{ cursor:default; }
+  .choice-btn.correct{ background:var(--good-bg); border-color:var(--good); color:var(--good); font-weight:600; }
+  .choice-btn.wrong{ background:var(--bad-bg); border-color:var(--bad); color:var(--bad); font-weight:600; }
+
+  .feedback{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); display:none; }
+  .feedback.show{ display:block; }
+  .fb-verdict{ font-weight:700; font-size:15px; margin-bottom:8px; }
+  .fb-verdict.good{ color:var(--good); }
+  .fb-verdict.bad{ color:var(--bad); }
+  .fb-meaning{ font-size:15px; }
+  .fb-example{ font-size:14px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
+  .next-btn{
+    margin-top:20px; width:100%; font-family:var(--sans); font-weight:700; font-size:15px;
+    padding:13px; background:var(--amber); color:#2a1c02; border:none; border-radius:5px; cursor:pointer;
+  }
+  .next-btn:hover{ background:var(--amber-deep); color:#fff; }
+
+  .results h2{ font-family:var(--serif); font-size:28px; margin:0 0 6px; }
+  .score-big{ font-family:var(--serif); font-size:56px; font-weight:700; color:var(--amber-deep); margin:14px 0 4px; }
+  .score-sub{ color:var(--ink-soft); font-size:14px; margin-bottom:26px; }
+  .review-list{ list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px; }
+  .review-list li{ border-left:3px solid var(--bad); padding:8px 14px; background:var(--bad-bg); border-radius:0 4px 4px 0; font-size:14px; }
+  .review-list li b{ font-family:var(--serif); font-size:15px; }
+  .no-wrong{ font-size:14px; color:var(--good); margin-bottom:24px; }
+  .restart-btn{
+    width:100%; font-family:var(--sans); font-weight:700; font-size:15px; padding:14px;
+    background:var(--ink); color:var(--paper); border:none; border-radius:5px; cursor:pointer;
+  }
+
+  @media (max-width:480px){
+    .card{ padding:24px 18px; }
+    .term{ font-size:24px; }
+    .score-big{ font-size:44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Từ vựng: Unit 3 - My Friends (GS6)</h1>
+    <span class="tag" id="counterTag">1 / 50</span>
+  </header>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="card" id="quizCard"></div>
+</div>
+
+<script>
+const VOCAB = [
+{term:"active",ipa:"/ˈæktɪv/",meaning:"nhanh nhẹn, năng động",example:"My grandmother is still very active at 80."},
+{term:"appearance",ipa:"/əˈpɪrəns/",meaning:"dáng vẻ, ngoại hình",example:"He cares a lot about his appearance."},
+{term:"boring",ipa:"/ˈbɔːrɪŋ/",meaning:"buồn tẻ",example:"The film was really boring."},
+{term:"choir",ipa:"/ˈkwaɪər/",meaning:"đội hợp xướng, đội đồng ca",example:"She sings in the school choir."},
+{term:"competition",ipa:"/ˌkɒmpəˈtɪʃn/",meaning:"cuộc thi, sự cạnh tranh",example:"He won first prize in the singing competition."},
+{term:"confident",ipa:"/ˈkɒnfɪdənt/",meaning:"tự tin",example:"She feels confident when speaking English."},
+{term:"curious",ipa:"/ˈkjʊriəs/",meaning:"tò mò, thích tìm hiểu",example:"Children are naturally curious about the world."},
+{term:"chubby",ipa:"/ˈtʃʌbi/",meaning:"mập mạp, mũm mĩm",example:"The baby has chubby cheeks."},
+{term:"gardening",ipa:"/ˈɡɑːrdnɪŋ/",meaning:"nghề làm vườn, công việc làm vườn",example:"My father enjoys gardening at the weekend."},
+{term:"freedom-loving",ipa:"/ˈfriːdəm ˈlʌvɪŋ/",meaning:"yêu tự do",example:"He is a freedom-loving person who hates strict rules."},
+{term:"sensitive",ipa:"/ˈsensətɪv/",meaning:"nhạy cảm",example:"She is very sensitive to criticism."},
+{term:"funny",ipa:"/ˈfʌni/",meaning:"buồn cười, thú vị",example:"My best friend is really funny."},
+{term:"generous",ipa:"/ˈdʒenərəs/",meaning:"hào phóng",example:"He is generous with his time and money."},
+{term:"patient",ipa:"/ˈpeɪʃnt/",meaning:"điềm tĩnh, kiên nhẫn",example:"A good teacher must be patient."},
+{term:"personality",ipa:"/ˌpɜːrsəˈnæləti/",meaning:"tính cách, cá tính",example:"She has a warm and friendly personality."},
+{term:"prepare",ipa:"/prɪˈper/",meaning:"chuẩn bị",example:"We need to prepare for the test tomorrow."},
+{term:"reliable",ipa:"/rɪˈlaɪəbl/",meaning:"đáng tin cậy",example:"He is a reliable friend who always keeps his promises."},
+{term:"serious",ipa:"/ˈsɪriəs/",meaning:"nghiêm trọng, nghiêm túc",example:"My brother is very serious about his studies."},
+{term:"shy",ipa:"/ʃaɪ/",meaning:"bẽn lẽn, hay xấu hổ, ngượng ngùng",example:"She is too shy to speak in front of the class."},
+{term:"sporty",ipa:"/ˈspɔːrti/",meaning:"dáng thể thao, khỏe mạnh, ham mê thể thao",example:"My cousin is sporty and plays football every day."},
+{term:"eye",ipa:"/aɪ/",meaning:"mắt",example:"She has beautiful brown eyes."},
+{term:"nose",ipa:"/noʊz/",meaning:"mũi",example:"He has a small nose."},
+{term:"mouth",ipa:"/maʊθ/",meaning:"miệng",example:"Cover your mouth when you cough."},
+{term:"shoulder",ipa:"/ˈʃoʊldər/",meaning:"vai",example:"He carried the bag on his shoulder."},
+{term:"chest",ipa:"/tʃest/",meaning:"ngực",example:"The doctor listened to his chest."},
+{term:"hand",ipa:"/hænd/",meaning:"bàn tay",example:"Wash your hands before eating."},
+{term:"leg",ipa:"/leɡ/",meaning:"cẳng chân",example:"He hurt his leg while running."},
+{term:"foot",ipa:"/fʊt/",meaning:"bàn chân",example:"My left foot hurts."},
+{term:"hair",ipa:"/her/",meaning:"tóc",example:"She has long black hair."},
+{term:"eyebrow",ipa:"/ˈaɪbraʊ/",meaning:"lông mày",example:"He raised his eyebrow in surprise."},
+{term:"ear",ipa:"/ɪr/",meaning:"tai",example:"The music was so loud it hurt my ears."},
+{term:"neck",ipa:"/nek/",meaning:"cổ",example:"She wears a scarf around her neck."},
+{term:"arm",ipa:"/ɑːrm/",meaning:"cánh tay",example:"He broke his arm playing football."},
+{term:"elbow",ipa:"/ˈelboʊ/",meaning:"khuỷu tay",example:"Don't put your elbows on the table."},
+{term:"finger",ipa:"/ˈfɪŋɡər/",meaning:"ngón tay",example:"She cut her finger while cooking."},
+{term:"knee",ipa:"/niː/",meaning:"đầu gối",example:"He fell and hurt his knee."},
+{term:"lazy",ipa:"/ˈleɪzi/",meaning:"lười",example:"He is too lazy to do his homework."},
+{term:"handsome",ipa:"/ˈhænsəm/",meaning:"đẹp trai",example:"Her brother is tall and handsome."},
+{term:"cheek",ipa:"/tʃiːk/",meaning:"má",example:"The baby has rosy cheeks."},
+{term:"well-built",ipa:"/ˌwel ˈbɪlt/",meaning:"khỏe khoắn",example:"The athlete is tall and well-built."},
+{term:"stilt house",ipa:"/stɪlt haʊs/",meaning:"nhà sàn",example:"Many ethnic families live in a stilt house."},
+{term:"ceiling fan",ipa:"/ˈsiːlɪŋ fæn/",meaning:"quạt trần",example:"Please turn on the ceiling fan."},
+{term:"intelligent",ipa:"/ɪnˈtelɪdʒənt/",meaning:"thông minh",example:"She is an intelligent student."},
+{term:"tell jokes",ipa:"/tel dʒoʊks/",meaning:"kể chuyện cười",example:"He loves to tell jokes at parties."},
+{term:"make friends",ipa:"/meɪk frendz/",meaning:"kết bạn",example:"It's easy to make friends at school."},
+{term:"creative",ipa:"/kriˈeɪtɪv/",meaning:"sáng tạo",example:"She is very creative and loves drawing."},
+{term:"talkative",ipa:"/ˈtɔːkətɪv/",meaning:"hoạt ngôn, thích nói",example:"My sister is talkative and makes friends quickly."},
+{term:"hard-working",ipa:"/ˌhɑːrd ˈwɜːrkɪŋ/",meaning:"chăm chỉ",example:"He is a hard-working student."},
+{term:"make mistakes",ipa:"/meɪk mɪˈsteɪks/",meaning:"mắc lỗi",example:"Don't be afraid to make mistakes when speaking English."},
+{term:"weak",ipa:"/wiːk/",meaning:"yếu ớt",example:"He felt weak after the long illness."}
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+let order = [];
+let current = 0;
+let score = 0;
+let wrongItems = [];
+let answered = false;
+
+function startQuiz(){
+  order = shuffle(VOCAB);
+  current = 0;
+  score = 0;
+  wrongItems = [];
+  renderQuestion();
+}
+
+function buildChoices(correctItem){
+  const pool = VOCAB.filter(v=>v.meaning!==correctItem.meaning);
+  const distractors = shuffle(pool).slice(0,3).map(v=>v.meaning);
+  return shuffle([correctItem.meaning, ...distractors]);
+}
+
+function renderQuestion(){
+  answered = false;
+  const total = order.length;
+  document.getElementById('counterTag').textContent = (current+1)+" / "+total;
+  document.getElementById('progressFill').style.width = ((current)/total*100)+"%";
+
+  const item = order[current];
+  const card = document.getElementById('quizCard');
+
+  let bodyHtml = `
+    <div class="qmeta"><span>Câu ${current+1} / ${total}</span></div>
+    <div class="prompt-label">Từ này có nghĩa là gì?</div>
+    <div class="term">${item.term}</div>
+    <div class="ipa">${item.ipa}</div>
+    <div class="choices" id="choicesBox">
+  `;
+  const choices = buildChoices(item);
+  choices.forEach(c=>{
+    bodyHtml += `<button class="choice-btn" data-answer="${encodeURIComponent(c)}" onclick="handleChoice(this)">${c}</button>`;
+  });
+  bodyHtml += `</div><div class="feedback" id="feedbackBox"></div>`;
+
+  card.innerHTML = bodyHtml;
+}
+
+function showFeedback(isCorrect, item){
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.add('show');
+  fb.innerHTML = `
+    <div class="fb-verdict ${isCorrect?'good':'bad'}">${isCorrect ? 'Chính xác!' : 'Chưa đúng.'}</div>
+    <div class="fb-meaning">Nghĩa đúng: <strong>${item.meaning}</strong></div>
+    <div class="fb-example">Ví dụ: ${item.example}</div>
+  `;
+  const btn = document.createElement('button');
+  btn.className = 'next-btn';
+  btn.textContent = (current === order.length-1) ? 'Xem kết quả' : 'Câu tiếp theo';
+  btn.onclick = goNext;
+  fb.appendChild(btn);
+}
+
+function handleChoice(btn){
+  if(answered) return;
+  answered = true;
+  const item = order[current];
+  const chosen = decodeURIComponent(btn.getAttribute('data-answer'));
+  const isCorrect = chosen === item.meaning;
+
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled = true;
+    const val = decodeURIComponent(b.getAttribute('data-answer'));
+    if(val === item.meaning) b.classList.add('correct');
+    else if(b===btn) b.classList.add('wrong');
+  });
+
+  if(isCorrect) score++;
+  else wrongItems.push(item);
+
+  showFeedback(isCorrect, item);
+}
+
+function goNext(){
+  if(current === order.length-1){
+    renderResults();
+  } else {
+    current++;
+    renderQuestion();
+  }
+}
+
+function renderResults(){
+  document.getElementById('progressFill').style.width = "100%";
+  document.getElementById('counterTag').textContent = order.length+" / "+order.length;
+  const total = order.length;
+  const pct = Math.round(score/total*100);
+
+  let html = `
+    <div class="results">
+      <h2>Hoàn thành!</h2>
+      <div class="score-big">${score}/${total}</div>
+      <div class="score-sub">Bạn đã trả lời đúng ${pct}% số câu hỏi.</div>
+  `;
+
+  if(wrongItems.length === 0){
+    html += `<div class="no-wrong">Xuất sắc! Không có câu nào sai.</div>`;
+  } else {
+    html += `<ul class="review-list">`;
+    wrongItems.forEach(item=>{
+      html += `<li><b>${item.term}</b> — ${item.meaning}</li>`;
+    });
+    html += `</ul>`;
+  }
+
+  html += `<button class="restart-btn" onclick="startQuiz()">Làm lại từ đầu</button></div>`;
+
+  document.getElementById('quizCard').innerHTML = html;
+}
+
+startQuiz();
+</script>
+</body>
+</html>
